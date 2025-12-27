@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+     <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
+
+</head>
+<body>
+   <div class="h-screen w-full bg-gray-800 flex items-center justify-center ">
+     <form 
+     action="/user/login"
+     method="post"
+     class="flex flex-col gap-2"
+     >
+        <input 
+        type="text"
+        placeholder="Enter your Name.."
+        name="username"
+        >
+        <br>
+
+        <input 
+        type="text"
+        placeholder="Enter your password"
+        name="password"
+        >
+        <br>
+        <button type="submit" class="bg-blue-400 text-white mx-3 py-2 w-[75px] rounded-xl ">Submit</button>
+    </form>
+   </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
+</body>
+</html>
