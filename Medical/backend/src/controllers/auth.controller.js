@@ -64,4 +64,15 @@ async function loginUser(req,res){
 
 
 
-module.exports = {registerUser,loginUser};
+async function fetchProfile(req,res,next) {
+    const user = req.user;
+
+    console.log(req.user)
+
+    res.status(200).json({
+        user
+    })
+}
+
+
+module.exports = {registerUser,loginUser,fetchProfile};
