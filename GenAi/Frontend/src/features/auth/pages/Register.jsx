@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {useNavigate , Link} from 'react-router'
+import { useAuth } from '../hooks/useAuth'
 
 const Register = () => {
   const navigate = useNavigate()
 
-    const handleSubmit = (e)=>{
+  const {loading, handleRegister} = useAuth()
+
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+    const handleSubmit = async (e)=>{
      e.preventDefault()
+     await handleRegister({username, email, password})
+     navigate("/")
     }
+ if(loading){
+  return (<div><h1>Loading....</h1></div>)
+ }
+
   return (
     <div>
        <div className='h-screen w-full flex flex-col items-center justify-center bg-gray-900'>
@@ -17,17 +29,23 @@ const Register = () => {
 
    <div>
       <label htmlFor="username">Username</label>
-      <input className='border w-full p-2 rounded mt-1' type="text" id='username' name='username' placeholder='Enter Username'/>
+      <input 
+      onChange={(e)=>{setUsername(e.target.value)}}
+      className='border w-full p-2 rounded mt-1' type="text" id='username' name='username' placeholder='Enter Username'/>
     </div>
 
     <div>
       <label htmlFor="email">Email</label>
-      <input className='border w-full p-2 rounded mt-1' type="text" id='email' name='email' placeholder='Enter e-mail'/>
+      <input
+      onChange={(e)=>{setEmail(e.target.value)}}
+      className='border w-full p-2 rounded mt-1' type="text" id='email' name='email' placeholder='Enter e-mail'/>
     </div>
 
     <div>
       <label htmlFor="password">Password</label>
-      <input className='border w-full p-2 rounded mt-1' type="password" id='password' name='password' placeholder='Enter your password'/>
+      <input 
+      onChange={(e)=>{setPassword(e.target.value)}}
+      className='border w-full p-2 rounded mt-1' type="password" id='password' name='password' placeholder='Enter your password'/>
     </div>
 
     <button className='bg-green-500 text-white p-2 rounded active:scale-95'>Register</button>
