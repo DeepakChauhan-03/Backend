@@ -46,10 +46,14 @@ export const useAuth = ()=>{
 
      useEffect(()=>{
     const getAndSetUser = async ()=>{
+      try {
          const data = await getMe()
          console.log(data)
          setUser(data.user)
+      } catch (error){} finally {
          setLoading(false)
+      }
+         
     }
     getAndSetUser() 
  },[])

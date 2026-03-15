@@ -15,9 +15,9 @@ const [password,setPassword] = useState("")
    handleLogin({email,password})
    navigate("/")
  }
-//  if(loading){
-//   return (<div><h1>Loading....</h1></div>)
-//  }
+ if(loading){
+  return (<div><h1>Loading....</h1></div>)
+ }
 
   return (
    <div className='main h-screen w-full flex flex-col items-center justify-center bg-gray-900'>
