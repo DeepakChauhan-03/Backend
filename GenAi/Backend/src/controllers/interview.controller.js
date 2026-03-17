@@ -20,17 +20,16 @@ async function generateInterviewController(req,res){
         resume: resumeContent.text,
         selfDescription,
         jobDescription,
-        ...interViewReportByAi
+        technicalQuestions
      })
 
      res.status(201).json({
         message:"Interview generated successfully",
-        interviewReport
+        interviewReport,
+        interViewReportByAi
      })
 
 }
-
-
 
 
 
