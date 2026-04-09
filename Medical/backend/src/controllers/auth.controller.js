@@ -1,7 +1,7 @@
 const userModel = require('../models/user.model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-
+//register
 async function registerUser(req,res){
    const { name,email,gender,number,password } = req.body;
 
@@ -61,7 +61,6 @@ async function loginUser(req,res){
         user
     })
 }
-
 
 
 async function fetchProfile(req,res,next) {
