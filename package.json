@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/DeepakChauhan-03/Backend/issues"
   },
-  "homepage": "https://github.com/DeepakChauhan-03/Backend#readme"
+  "homepage": "https://github.com/DeepakChauhan-03/Backend#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "socket.io": "^4.8.3",
+    "y-socket.io": "^1.1.3"
+  }
 }
