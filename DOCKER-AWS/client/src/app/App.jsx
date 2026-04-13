@@ -1,6 +1,6 @@
 import React from 'react'
 import {Editor} from '@monaco-editor/react'
-import {MonacoBinding } from "y-monaco"
+import {MonacoBinding, MonacoBinding } from "y-monaco"
 import {useRef, useMemo} from 'react'
 import * as Y from 'yjs'
 import {SocketIOProvider} from "y-socket.io"
@@ -8,8 +8,23 @@ import {SocketIOProvider} from "y-socket.io"
 const App = () => {
  const editorRef = useRef(null)
 
+ const ydoc = useMemo(()=> new Y.Doc(), []);
+ const yText = useMemo(()=> ydoc.getText("monaco"),[ydoc]) 
+
+
  const handleMount = (editor)=>{
        editorRef.current = editor;
+   
+       //this line connects user to the server
+       const provider = new SocketIOProvider("http://localhost:3000", "monaco" , ydoc)  
+        
+       const MonacoBinding = new MonacoBinding(
+        yText,
+        editorRef.current.getModel(),
+        new Set ([editorRef.current]),
+        provider.awareness
+       )
+
  }
 
   return (
