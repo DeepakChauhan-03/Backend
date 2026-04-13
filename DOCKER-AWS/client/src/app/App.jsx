@@ -1,6 +1,6 @@
 import React from 'react'
 import {Editor} from '@monaco-editor/react'
-import {MonacoBinding, MonacoBinding } from "y-monaco"
+import { MonacoBinding } from "y-monaco"
 import {useRef, useMemo} from 'react'
 import * as Y from 'yjs'
 import {SocketIOProvider} from "y-socket.io"
@@ -16,9 +16,11 @@ const App = () => {
        editorRef.current = editor;
    
        //this line connects user to the server
-       const provider = new SocketIOProvider("http://localhost:3000", "monaco" , ydoc)  
-        
-       const MonacoBinding = new MonacoBinding(
+       const provider = new SocketIOProvider("http://localhost:3000", "monaco" , ydoc,{
+        autoConnect:true,
+       })  
+
+       const monacoBinding = new MonacoBinding(
         yText,
         editorRef.current.getModel(),
         new Set ([editorRef.current]),
@@ -40,6 +42,7 @@ const App = () => {
         defaultValue='// some comment'
         defaultLanguage='javascript'
         theme='vs-dark'
+        onMount={handleMount}
         />
 
       </section>
