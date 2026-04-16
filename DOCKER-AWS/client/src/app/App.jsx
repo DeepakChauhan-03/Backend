@@ -91,7 +91,7 @@ function App() {
             name="username"
           />
           <button
-            className="p-2 rounded-lg bg-amber-50 text-gray-950 font-bold"
+            className="p-2 rounded-lg bg-green-400 text-white font-bold"
           >
             Join
           </button>
@@ -110,7 +110,7 @@ function App() {
         <h2 className="text-2xl font-bold p-4 border-b border-gray-300">Users</h2>
         <ul className="p-4">
           {users.map((user, index) => (
-            <li key={index} className="p-2 bg-gray-800 text-white rounded mb-2">
+            <li key={index} className="p-2 bg-green-500 text-white rounded mb-2">
               {user.username}
             </li>
           ))}
