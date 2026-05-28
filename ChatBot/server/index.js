@@ -12,7 +12,7 @@ const genAI = new GoogleGenerativeAI(process.env.KEY);
 let model = genAI.getGenerativeModel({model:"gemini-2.5-flash"})
 //creating api
 app.post('/ask',async(req,res)=>{
-    const {question} = req.body
+    const {question} = req.body 
     let data = await model.generateContent(question);
     let finalData = data.response.text()
 
