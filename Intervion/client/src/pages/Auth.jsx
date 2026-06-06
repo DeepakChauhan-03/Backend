@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../utils/firebase';
 import { ServerUrl } from '../App';
+import axios from 'axios'
 
 const Auth = () => {
 
@@ -14,11 +15,13 @@ const Auth = () => {
           let User = response.user
           let name = User.displayName;
           let email = User.email;
-          const result = await axios.post(ServerUrl, "/api/auth/google",
+          const result = await axios.post(ServerUrl+"/api/auth/google",
             {name,email}, {withCredentials:true}
           )
+
+          console.log(result)
         } catch (error) {
-          
+          console.log("error in handlelogin", error)
         }
   }
 
