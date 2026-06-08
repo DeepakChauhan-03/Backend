@@ -25,7 +25,7 @@ const App = () => {
       }
     }
     getUser()
- },[])
+ },[dispatch])
 
   return (
     <Routes>
