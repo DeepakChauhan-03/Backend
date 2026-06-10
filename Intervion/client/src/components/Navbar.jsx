@@ -4,6 +4,9 @@ import { VscRobot } from "react-icons/vsc";
 import { BsCoin } from "react-icons/bs";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import {useNavigate} from 'react-router-dom'
+import {ServerUrl} from '../App.jsx'
+import { setUserData } from '../redux/userSlice.js';
+import axios from 'axios';
 const Navbar = () => {
     const {userData} = useSelector((state)=>state.user)
     const [showCreditPopup, setShowCreditPopup] = useState(false)
@@ -11,7 +14,17 @@ const Navbar = () => {
      const navigate = useNavigate()
      const dispatch = useDispatch()
 
-      
+      const handleLogout = async()=>{
+        try {
+           await axios.get(ServerUrl + "/api/auth/logout", {withCredentials:true} )
+           dispatch(setUserData(null))
+           setShowCreditPopup(false)
+           setShowUserPopup(false)
+           navigate("/")
+        } catch (error) {
+           console.log("Error in logout api", error)
+        }
+      }
     
   return (
     <div className='bg-[#f3f3f3] flex justify-center px-4 pt-6'>
@@ -65,7 +78,8 @@ const Navbar = () => {
                                 <button onClick={()=> navigate("/history")}
                                  className='w-full text-left text-sm py-2 
                                 hover:text-black text-gray-600'>Interview History</button>
-                                <button className='w-full text-left text-sm py-2
+                                <button onClick={handleLogout}
+                                 className='w-full text-left text-sm py-2
                                 flex items-center gap-2 text-red-500'><RiLogoutCircleLine size={16} /> 
                                 Logout</button>
                             </div>
