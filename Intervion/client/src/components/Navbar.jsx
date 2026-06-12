@@ -20,15 +20,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Debug
-  console.log("Navbar User Data:", userData);
-
-  const userName =
-    userData?.name ||
-    userData?.user?.name ||
-    userData?.fullName ||
-    "";
-
   const handleLogout = async () => {
     try {
       await axios.get(`${ServerUrl}/api/auth/logout`, {
@@ -41,21 +32,18 @@ const Navbar = () => {
 
       navigate("/");
     } catch (error) {
-      console.log("Error in logout api", error);
+      console.error("Error in logout api:", error);
     }
   };
 
   return (
     <div className="bg-[#f3f3f3] flex justify-center px-4 pt-6">
       <div
-        className="w-full max-w-6xl bg-white rounded-3xl shadow-sm border
-        border-gray-200 px-8 py-4 flex justify-between items-center relative"
+        className="w-full max-w-6xl bg-white rounded-3xl shadow-sm
+        border border-gray-200 px-8 py-4 flex justify-between items-center relative"
       >
         {/* Logo */}
-        <div
-          className="flex items-center gap-3 cursor-pointer"
-          onClick={() => navigate("/")}
-        >
+        <div className="flex items-center gap-3 cursor-pointer">
           <div className="bg-black text-white p-2 rounded-lg">
             <VscRobot size={18} />
           </div>
@@ -65,7 +53,7 @@ const Navbar = () => {
           </h1>
         </div>
 
-        {/* Right Side */}
+        {/* Right Section */}
         <div className="flex items-center gap-6 relative">
           {/* Credits */}
           <div className="relative">
@@ -120,9 +108,7 @@ const Navbar = () => {
               className="w-9 h-9 bg-black text-white rounded-full
               flex items-center justify-center font-semibold"
             >
-              {userName
-                ? userName.charAt(0).toUpperCase()
-                : "X"}
+              {userData?.name?.charAt(0)?.toUpperCase() || "X"}
             </button>
 
             {showUserPopup && (
@@ -131,7 +117,7 @@ const Navbar = () => {
                 border border-gray-200 rounded-xl p-4 z-50"
               >
                 <p className="text-md text-blue-500 font-medium mb-1">
-                  {userName || "User"}
+                  {userData?.name}
                 </p>
 
                 <button
@@ -156,9 +142,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {showAuth && (
-        <AuthModel onClose={() => setShowAuth(false)} />
-      )}
+      {showAuth && <AuthModel onClose={() => setShowAuth(false)} />}
     </div>
   );
 };
