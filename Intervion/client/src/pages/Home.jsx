@@ -30,6 +30,12 @@ const Home = () => {
             </span>
           </span>
           </h1>
+          {/* //paragraph */}
+          <p className="text-gray-500 mt-6 max-w-2xl mx-auto text-lg">
+             Role based mock interviews with smart , adaptive difficulty and real-time
+             performance evaluation.
+          </p>
+
         </div>
       </div>
     </div>
