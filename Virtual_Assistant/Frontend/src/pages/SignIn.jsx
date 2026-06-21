@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import bg from '../assets/bgimage.jpg';
+import bg from '../assets/jarvisbg.jpg';
 import {useNavigate} from 'react-router-dom'
 import UserContext, { userDataContext } from '../context/UserContext';
 import axios from 'axios'
@@ -35,8 +35,8 @@ const SignIn = () => {
    
      <form
      onSubmit={handleSignIn}
-     className='w-[90%] h-150 max-w-125 bg-[#0000003f]
-      backdrop-blur shadow-lg shadow-black flex flex-col items-center justify-center
+     className='w-[90%] h-150 max-w-125 bg-[#00000012]
+      backdrop-blur shadow-lg shadow-blue-300  flex flex-col items-center justify-center
       gap-5 px-5'>
      <h1 className='text-white text-[30px] mb-7.5 font-semibold'>Register to 
       <span className='text-blue-400'> Virtual Assistant</span></h1>
