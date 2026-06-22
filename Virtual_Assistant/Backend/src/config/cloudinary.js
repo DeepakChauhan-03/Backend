@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs'
 
 const uploadOnCloudinary = async(filePath)=>{
  // Configuration
@@ -11,9 +12,15 @@ const uploadOnCloudinary = async(filePath)=>{
      // Upload an image
      const uploadResult = await cloudinary.uploader
        .upload(filePath)
+       fs.unlinkSync(filePath)
        return uploadResult.secure_url
+       
   } catch (error) {
-    
+      return res.status(500).json({
+        message:"Cloudinary error"
+      })
   }
 
 }
+
+export default uploadOnCloudinary
