@@ -3,6 +3,7 @@ import Card from '../components/Card'
 import image1 from '../assets/jarvisbg.jpg'
 import { LuImageUp } from "react-icons/lu";
 import { userDataContext } from '../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Customize = () => {
 
@@ -10,6 +11,7 @@ const Customize = () => {
         backendImage,setBackendImage} = useContext(userDataContext)
 
   const inputImage = useRef()
+  const navigate = useNavigate()
 
   const handleImage = (e)=>{
      const file = e.target.files[0]
@@ -34,10 +36,16 @@ const Customize = () => {
           <Card  image={image1}/>
           {/* input div */}
           <div 
-          onClick={()=>inputImage.current.click()}
-          className='w-18 h-35 lg:w-45 lg:h-70 bg-[#030326] border-2 border-[blue] rounded-2xl 
+          onClick={()=>{inputImage.current.click()
+            setSelectedImage("input")
+          }
+          }
+          className={`w-18 h-35 lg:w-45 lg:h-70 bg-[#030326] border-2 border-[blue] rounded-2xl 
     overflow-hidden hover:shadow-2xl hover:shadow-blue-500 cursor-pointer
-    hover:border-3 hover:border-white flex items-center justify-center text-4xl'>
+    hover:border-3 hover:border-white flex items-center justify-center text-4xl 
+    ${
+        selectedImage==="input" ? "border-white border-3 shadow-2xl shadow-blue-500" : ""
+      }`}>
       {
          !frontendImage && <LuImageUp  className='text-white'/>
       }
@@ -49,8 +57,11 @@ const Customize = () => {
 
     <input type="file" accept='image/*' ref={inputImage} hidden onChange={handleImage} />
       </div>
-      <button className='h-15 min-w-38 bg-white rounded-full text-black
-       font-semibold text-lg mt-4 hover:bg-gray-300 '>Next</button>
+      {
+        selectedImage && <button className='h-15 min-w-38 bg-white rounded-full text-black
+       font-semibold text-lg mt-4 hover:bg-gray-300 ' 
+       onClick={()=> navigate("/customize2")}>Next</button>
+      }
     </div>
   )
 }
