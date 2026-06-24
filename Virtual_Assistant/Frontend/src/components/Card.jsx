@@ -7,7 +7,12 @@ const Card = ({ image }) => {
 
   return (
     <div
-      onClick={() => setSelectedImage(image)}
+      onClick={() =>{
+        setSelectedImage(image)
+        setBackendImage(null)
+        setFrontendImage(null)
+      }
+      }
       className={`w-18 h-35 lg:w-45 lg:h-70 bg-[#030326] border-2 border-blue-500 rounded-2xl overflow-hidden cursor-pointer
          transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500 hover:border-white ${
         selectedImage === image ? "border-white shadow-2xl shadow-blue-500" : ""

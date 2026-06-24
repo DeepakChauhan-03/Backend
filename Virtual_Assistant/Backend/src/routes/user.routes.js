@@ -1,9 +1,15 @@
 import express from 'express'
-import { getCurrentUser } from '../controllers/user.controller.js';
+import { getCurrentUser, updateAssistant } from '../controllers/user.controller.js';
 import isAuth from '../middlewares/isAuth.js';
+
+import upload from '../middlewares/multer.js';
 
 const userRouter = express.Router();
 
+//get current user route
 userRouter.get("/current",isAuth,getCurrentUser)
+
+//update current user route
+userRouter.post("/update",isAuth,upload.single("assistantImage"),updateAssistant)
 
 export default userRouter
