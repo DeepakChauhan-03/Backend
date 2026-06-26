@@ -4,6 +4,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { IoIosArrowRoundBack } from "react-icons/io";
 
+//customize 2 - assistant creation
+
 const Customize2 = () => {
     const navigate = useNavigate()
     const {userData,setUserData,backendImage,selectedImage,serverUrl} = useContext(userDataContext)

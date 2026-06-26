@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { userDataContext } from "../context/UserContext"; 
 
+//Image card
+
 const Card = ({ image }) => {
   const {selectedImage, setSelectedImage,  frontendImage,setFrontendImage,
         backendImage,setBackendImage} = useContext(userDataContext)
