@@ -13,6 +13,7 @@ const Customize2 = () => {
 
     const handleUpdateAssistant = async()=>{
         try {
+            setAssistantName("")
             let formData = new FormData()
             formData.append("assistantName",assistantName)
             if(backendImage){

@@ -34,7 +34,7 @@ const Home = () => {
       <div className='w-75 h-100 flex justify-center items-center
        overflow-hidden rounded-4xl shadow-xl shadow-blue-500'>
           <img src={userData?.assistantImage} alt="image"
-          className='h-full object-cover ' />
+          className='h-full w-full object-cover '  />
       </div>
       <h1 className='text-4xl text-white mt-10'>I'm {userData.assistantName}</h1>
     </div>
