@@ -65,7 +65,7 @@ export const askToAssistant = async(req,res)=>{
       // const assistantImage = user.assistantImage
       const assistantName = user.assistantName
      
-      const result = await geminiResponse(command,userName,assistantName)
+      const result = await geminiResponse(command,assistantName,userName)
      
       const jsonMatch = result.match(/{[\s\S]*}/)
       if(!jsonMatch){
