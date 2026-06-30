@@ -60,12 +60,20 @@ export const updateAssistant = async (req,res)=>{
 export const askToAssistant = async(req,res)=>{
    try {
      const {command} = req.body
-     const user = await UserModel.findById(res.userId)
+     const user = await UserModel.findById(req.userId)
+     user.history.push(command)
+     user.save()
       const userName = user.name
       // const assistantImage = user.assistantImage
       const assistantName = user.assistantName
      
-      const result = await geminiResponse(command,assistantName,userName)
+      const result = await geminiResponse(command,assistantName,userName);
+      console.log("gemini result" , result)
+      if (!result) {
+  return res.status(500).json({
+    message: "Gemini API failed. Please try again later."
+  });
+}
      
       const jsonMatch = result.match(/{[\s\S]*}/)
       if(!jsonMatch){
@@ -77,25 +85,25 @@ export const askToAssistant = async(req,res)=>{
       const gemResult = JSON.parse(jsonMatch[0])
       const type = gemResult.type
       switch(type){
-        case 'get-date' :
+        case 'get_date' :
            return res.json({
             type,
             userInput:gemResult.userInput,
             response:`current Date is ${moment().format(("YYYY-MM-DD"))}`
            });
-           case 'get-time' :
+           case 'get_time' :
            return res.json({
             type,
             userInput:gemResult.userInput,
             response:`current time is is ${moment().format(("hh:mmA"))}`
            });
-           case 'get-day' :
+           case 'get_day' :
            return res.json({
             type,
             userInput:gemResult.userInput,
             response:`Today is ${moment().format(("dddd"))}`
            });
-           case 'get-month' :
+           case 'get_month' :
            return res.json({
             type,
             userInput:gemResult.userInput,
@@ -123,10 +131,15 @@ export const askToAssistant = async(req,res)=>{
 
       }
 
+      
+
 
    } catch (error) {
-       return res.status(400).json({
-          message:"Ask assistant error",
-        })
+       console.error("Ask Assistant Error:", error.response?.data || error.message);
+
+    return res.status(500).json({
+      message: error.message,
+      stack: error.stack
+   });
    }
 }

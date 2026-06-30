@@ -3,6 +3,7 @@ import axios from 'axios'
 const geminiResponse = async (command,assistantName,userName)=>{
       try {
         const apiUrl = process.env.GEMINI_API_KEY
+        // console.log(apiUrl)
         const prompt = `You are a virtual assistant named ${assistantName} created by ${userName}.
 You are not Google. You will now behave like a voice-enabled assistant.
 
@@ -24,7 +25,9 @@ Instructions:
 - "response": A short voice-friendly reply, e.g., "Sure, playing it now", "Here's what I found", "Today is Tuesday", etc.
 
 Type meanings:
-- "general": if it's a factual or informational question.
+- "general": if it's a factual or informational question, aur agar 
+koi aise question puchta hai jiska answer tumhe pata haiusko bhi general ki category me rakhna 
+aur bas short answer dena.
 - "google_search": if user wants to search something on Google.
 - "youtube_search": if user wants to search something on YouTube.
 - "youtube_play": if user wants to directly play a video or song.
