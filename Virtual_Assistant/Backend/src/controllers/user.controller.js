@@ -2,6 +2,7 @@ import UserModel from '../models/user.model.js'
 import uploadOnCloudinary from '../config/cloudinary.js'
 import geminiResponse from '../gemini.js'
 import { response } from 'express'
+import moment from "moment";
 
 export const getCurrentUser = async(req,res)=>{
   try {
@@ -58,11 +59,18 @@ export const updateAssistant = async (req,res)=>{
 
 //command
 export const askToAssistant = async(req,res)=>{
+  // console.log("Body:", req.body);
+  // console.log("req.userId:", req.userId);
    try {
      const {command} = req.body
      const user = await UserModel.findById(req.userId)
+     if (!user) {
+    return res.status(404).json({
+        message: "User not found"
+    });
+}
      user.history.push(command)
-     user.save()
+     await user.save()
       const userName = user.name
       // const assistantImage = user.assistantImage
       const assistantName = user.assistantName
@@ -76,6 +84,7 @@ export const askToAssistant = async(req,res)=>{
 }
      
       const jsonMatch = result.match(/{[\s\S]*}/)
+      console.log("JSON Match:", jsonMatch);
       if(!jsonMatch){
         return res.status(400).json({
           messgae:"I can't understand"
@@ -135,7 +144,7 @@ export const askToAssistant = async(req,res)=>{
 
 
    } catch (error) {
-       console.error("Ask Assistant Error:", error.response?.data || error.message);
+       console.error("Ask Assistant Error:", error);
 
     return res.status(500).json({
       message: error.message,
